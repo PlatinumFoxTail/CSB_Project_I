@@ -1,0 +1,15 @@
+LINK: https://github.com/PlatinumFoxTail/CSB_Project_I
+
+FLAW 1: 
+Exact source link pinpointing flaw 1: 
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/96999f8c7453229fbd3107007d5682b8f0406280/src/pages/views.py#L23
+
+Description of flaw 1:
+The inserted flaw is Cross-site Request Forgery (CSRF). By marking the transfer view with the csrf_exempt decorator, Django does not
+require a CSRF protection cookie. Imagine an attacker creates a malicious website with a hidden form that submits a POST request to 
+the homePageView on the banktransfer application. The attacker fools an authenticated user to visit the malicious website. Since the 
+homePageView is decorated with @csrf_exempt, the server will not require a CSRF token for the POST request. As a result, the user's 
+browser unknowingly performs the financial transfer, resulting in unauthorized transactions without the user's approval.
+
+How to fix flaw 1:
+To fix the CSRF vulnerability, remove the @csrf_exempt decorator from the homePageView view.
