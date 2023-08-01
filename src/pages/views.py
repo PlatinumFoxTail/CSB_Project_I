@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.template import loader
 from django.db import transaction
 from .models import Account
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
 
 @transaction.atomic
+@csrf_exempt
 def transfer(sender, receiver, amount):
 	acc1 = Account.objects.get(iban=sender)
 	acc2 = Account.objects.get(iban=receiver)
