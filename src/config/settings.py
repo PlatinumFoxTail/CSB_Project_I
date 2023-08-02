@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+import argon2
+import hashlib
+# imported argon2 library and hashlib module in order to use MD5 and Argon2 in PASSWORD_HASHERS
 
 import os
 
