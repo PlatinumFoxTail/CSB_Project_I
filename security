@@ -13,3 +13,21 @@ browser unknowingly performs the financial transfer, resulting in unauthorized t
 
 How to fix flaw 1:
 To fix the CSRF vulnerability, remove the @csrf_exempt decorator from the homePageView view.
+
+FLAW 2:
+Exact source link pinpointing flaw 2: 
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/1cf6232dfccf13ab444df4d3dfc75c1ba4b689dd/src/config/settings.py#L106C5-L106C5
+
+Description of flaw 2:
+The inserted flaw is a Cryptographic Failure. The application is set to store passwords as unsalted MD5 (Message Digest Algorithm 5) 
+hashes. MD5 is a cryptographic hash function that generates a 128-bit hash value from an input data of any length. It is not 
+considered anymore secure for cryptographic purposes due to vulnerabilities that allow collisions (when two different inputs produce 
+the same hash output) and ease of brute-force attacks. 
+With an brute-force attack, an attacker could now try all possible combinations of characters to generate MD5 hashes and compare them 
+to the hashed passwords in the database. Since MD5 is quite quick to compute, the attacker can quickly identify matching hashes for 
+common passwords, even without the original password data, and get unauthorized access to user accounts.
+
+How to fix flaw 2:
+The flaw can be fixed by replacing the unsalted MD5 hash with storng adaptive and salted hashing functions with a work factor (delay 
+factor) such as Argon2, scrypt, bcrypt or PBKDF2. These aforementioned are advised by OWASP regarding dealing with cryptographic 
+failures related to hash functions. Directly after the flaw as indicated in the link to the flaw, Argon2 hash is uncommented. 
