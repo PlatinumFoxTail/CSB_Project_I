@@ -31,3 +31,24 @@ How to fix flaw 2:
 The flaw can be fixed by replacing the unsalted MD5 hash with storng adaptive and salted hashing functions with a work factor (delay 
 factor) such as Argon2, scrypt, bcrypt or PBKDF2. These aforementioned are advised by OWASP regarding dealing with cryptographic 
 failures related to hash functions. Directly after the flaw as indicated in the link to the flaw, Argon2 hash is uncommented. 
+
+FLAW 3:
+Exact source link pinpointing flaw 3:
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/a8b8ab964cc0943073148da7e5b2ee4a0ffb148d/src/pages/views.py#L28C3-L28C3
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/593c92cb9156fe05924efd69fcb1e8345d01ba71/src/pages/templates/pages/index.html#L42C13-L42C13
+
+Description of flaw 3:
+The inserted flaw is an Injection flaw. In the index.html the amount field type is set as text, allowing users to input any text 
+including non-numeric characters. In the views.py, the request.POST.get('amount') is not converting the amount to an integer before 
+passing it to the transfer function. This means the transfer function will receive the amount as a raw string without any 
+validation or conversion to integer. As a result of the aforementioned, an attacker can manipulate the amount e.g. by typing 
+"OR 1=1 --" instead of an actual numeric value. The OR 1=1 would always be evaluated to true and -- indicates a comment, ignoring 
+the the rest of the query. As a result, the attacker could gain unauthorized access to account records in the database with harms 
+like data theft and unathourized access to sensitive information.
+
+How to fix flaw 3:
+The flaw can be fixed by changing the type of the amount in the index.html file from "text" to "number" and also adding int to 
+request.POST.get('amount') i.e. int(request.POST.get('amount')) as commented out in the lines below where the flaws are occuring 
+(see the links above). By doing so we are double assuring that the amount input is an integer: Firstly validated correctly as an 
+integer (index.html, type=number) and secondly converted to an integer (int(request.POST.get('amount')). This prevents effectively 
+injection flaws for this specific part of the application.
