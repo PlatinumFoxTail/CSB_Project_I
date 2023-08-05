@@ -25,7 +25,7 @@ def homePageView(request):
 	if request.method == 'POST':
 		sender = request.POST.get('from')
 		receiver = request.POST.get('to')
-		amount = (request.POST.get('amount'))
+		amount = request.POST.get('amount')
 		#amount = int(request.POST.get('amount'))
 		transfer(sender, receiver, amount)
 
