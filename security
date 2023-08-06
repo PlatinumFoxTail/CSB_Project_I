@@ -52,3 +52,21 @@ request.POST.get('amount') i.e. int(request.POST.get('amount')) as commented out
 (see the links above). By doing so we are double assuring that the amount input is an integer: Firstly validated correctly as an 
 integer (index.html, type=number) and secondly converted to an integer (int(request.POST.get('amount')). This prevents effectively 
 injection flaws for this specific part of the application.
+
+FLAW 4:
+Exact source link pinpointing flaw 4:
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/e596348f9eb44139b561ca85a9052ddd8cbadffb/src/pages/views.py#L11
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/e596348f9eb44139b561ca85a9052ddd8cbadffb/src/pages/views.py#L25
+
+Description of flaw 4:
+In the existing application there is an Broken Acess Control flaw. The application lacks proper access control mechanisms, leading 
+to a Broken Access Control vulnerability. Without the proper access control mechanisms, anyone including unauthorized users, can 
+reach the homePageView and the transfer views and can do account transfer without authorization checks. The flaw could allow 
+attackers to potentially manipulate account data or other misuses.
+
+How to fix flaw 4:
+The flaw can be fixed by inserting the @login_required decorators prior to the homePageView and transfer views, as can be seen in 
+the links above where the decorators in question are commented out. The @login_required decorator will ensure authentication for 
+both the homePageView and transfer views. In the case of a user is not logged in and tries to access these aformentioned views, the 
+user will be rediredirected to the login page. When the user has logged in properly, the user will be able to access these views 
+and do transfers securely.
