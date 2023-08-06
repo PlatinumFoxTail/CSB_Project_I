@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 @transaction.atomic
+#@login_required
 def transfer(sender, receiver, amount):
 	acc1 = Account.objects.get(iban=sender)
 	acc2 = Account.objects.get(iban=receiver)
@@ -21,6 +22,7 @@ def transfer(sender, receiver, amount):
 	acc2.save()
 
 @csrf_exempt
+#@login_required
 def homePageView(request):
 	if request.method == 'POST':
 		sender = request.POST.get('from')
