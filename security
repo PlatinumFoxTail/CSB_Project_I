@@ -16,7 +16,7 @@ To fix the CSRF vulnerability, remove the @csrf_exempt decorator from the homePa
 
 FLAW 2:
 Exact source link pinpointing flaw 2: 
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/6dd0c584ad9c5a76c13a0088560a3724096e6310/src/config/settings.py#L109C5-L109C5
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/6dd0c584ad9c5a76c13a0088560a3724096e6310/src/config/settings.py#L109
 
 Description of flaw 2:
 The inserted flaw is a Cryptographic Failure. The application is set to store passwords as unsalted MD5 (Message Digest Algorithm 5) 
@@ -34,8 +34,8 @@ failures related to hash functions. Directly after the flaw as indicated in the 
 
 FLAW 3:
 Exact source link pinpointing flaw 3:
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/a8b8ab964cc0943073148da7e5b2ee4a0ffb148d/src/pages/views.py#L28C3-L28C3
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/593c92cb9156fe05924efd69fcb1e8345d01ba71/src/pages/templates/pages/index.html#L42C13-L42C13
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/a8b8ab964cc0943073148da7e5b2ee4a0ffb148d/src/pages/views.py#L28
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/593c92cb9156fe05924efd69fcb1e8345d01ba71/src/pages/templates/pages/index.html#L42
 
 Description of flaw 3:
 The inserted flaw is an Injection flaw. In the index.html the amount field type is set as text, allowing users to input any text 
