@@ -70,3 +70,18 @@ the links above where the decorators in question are commented out. The @login_r
 both the homePageView and transfer views. In the case of a user is not logged in and tries to access these aformentioned views, the 
 user will be rediredirected to the login page. When the user has logged in properly, the user will be able to access these views 
 and do transfers securely.
+
+FLAW 5:
+Exact source link pinpointing flaw 5:
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/18d9b94069725a849b7e060734a29eef13072d42/src/pages/views.py#L10C1-L10C1
+
+Description of flaw 5:
+In the existing application there is a Software and Data Integrity failure. The database changes made to acc1 and acc2 within the 
+transfer function will not be cancelled if an exception happens within the transfer function. This could result in data integrity 
+issues, where the database could be left in a not proper state if something goes wrong during the transfer.
+
+How to fix flaw 5:
+The flaw can be fixed by inserting the @transaction.atomic decorator prior to the transfer views, as can be seen in the link above 
+where the decorator in question is commented out. The transaction.atomic decorator is used to assure that the changes made to the 
+database within the transfer function are treated as a single atomic transaction. If any exception happens during the execution of 
+the function, the changes made within the function will be cancelled, and the database will remain intact and unmodified.
