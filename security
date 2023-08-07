@@ -73,7 +73,7 @@ and do transfers securely.
 
 FLAW 5:
 Exact source link pinpointing flaw 5:
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/18d9b94069725a849b7e060734a29eef13072d42/src/pages/views.py#L10C1-L10C1
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/18d9b94069725a849b7e060734a29eef13072d42/src/pages/views.py#L10
 
 Description of flaw 5:
 In the existing application there is a Software and Data Integrity failure. The database changes made to acc1 and acc2 within the 
