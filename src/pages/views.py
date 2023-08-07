@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-@transaction.atomic
+#@transaction.atomic
 #@login_required
 def transfer(sender, receiver, amount):
 	acc1 = Account.objects.get(iban=sender)
