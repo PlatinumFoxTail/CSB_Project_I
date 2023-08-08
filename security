@@ -29,8 +29,9 @@ common passwords, even without the original password data, and get unauthorized 
 
 How to fix flaw 2:
 The flaw can be fixed by replacing the unsalted MD5 hash with storng adaptive and salted hashing functions with a work factor (delay 
-factor) such as Argon2, scrypt, bcrypt or PBKDF2. These aforementioned are advised by OWASP regarding dealing with cryptographic 
-failures related to hash functions. Directly after the flaw as indicated in the link to the flaw, Argon2 hash is uncommented. 
+factor) such as Argon2, scrypt, bcrypt or PBKDF2. These aforementioned are advised by OWASP 
+(https://owasp.org/Top10/A02_2021-Cryptographic_Failures/) regarding dealing with cryptographic failures related to hash functions. 
+Directly after the flaw as indicated in the link to the flaw, Argon2 hash is commented out. 
 
 FLAW 3:
 Exact source link pinpointing flaw 3:
