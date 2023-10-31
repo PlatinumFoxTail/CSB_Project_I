@@ -3,6 +3,7 @@ from django.template import loader
 from django.db import transaction
 from .models import Account
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.html import escape 
 
 
 # Create your views here.
@@ -27,6 +28,8 @@ def homePageView(request):
 	if request.method == 'POST':
 		sender = request.POST.get('from')
 		receiver = request.POST.get('to')
+		#sender = escape(request.POST.get('from'))
+                #receiver = escape(request.POST.get('to'))
 		amount = int(request.POST.get('amount')
 		transfer(sender, receiver, amount)
 
