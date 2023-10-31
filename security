@@ -35,24 +35,18 @@ Directly after the flaw as indicated in the link to the flaw, Argon2 hash is com
 
 FLAW 3:
 Exact source link pinpointing flaw 3:
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/a8b8ab964cc0943073148da7e5b2ee4a0ffb148d/src/pages/views.py#L28
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/593c92cb9156fe05924efd69fcb1e8345d01ba71/src/pages/templates/pages/index.html#L42
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/0c46e0b772d1b6ad041c76c84abf69f15e04c940/src/pages/views.py#L29
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/0c46e0b772d1b6ad041c76c84abf69f15e04c940/src/pages/views.py#L30
 
 Description of flaw 3:
-The inserted flaw is an Injection flaw. In the index.html the amount field type is set as text, allowing users to input any text 
-including non-numeric characters. In the views.py, the request.POST.get('amount') is not converting the amount to an integer before 
-passing it to the transfer function. This means the transfer function will receive the amount as a raw string without any 
-validation or conversion to integer. As a result of the aforementioned, an attacker can manipulate the amount e.g. by typing 
-"OR 1=1 --" instead of an actual numeric value. The OR 1=1 would always be evaluated to true and -- indicates a comment, ignoring 
-the the rest of the query. As a result, the attacker could gain unauthorized access to account records in the database with harms 
-like data theft and unathourized access to sensitive information.
+In the existing application there is an Injection flaw. Since the sender and receiver variables are not sanitazied, an attacker 
+could inject e.g. malicious scripts such as following <script>alert("The page has been hacked!")</script> that would show to the 
+user that the page has been hacked.
 
 How to fix flaw 3:
-The flaw can be fixed by changing the type of the amount in the index.html file from "text" to "number" and also adding int to 
-request.POST.get('amount') i.e. int(request.POST.get('amount')) as commented out in the lines below where the flaws are occuring 
-(see the links above). By doing so we are double assuring that the amount input is an integer: Firstly validated correctly as an 
-integer (index.html, type=number) and secondly converted to an integer (int(request.POST.get('amount')). This prevents effectively 
-injection flaws for this specific part of the application.
+The flaw can be fixed by deleting the rows where the injection flaw occurs (the two links pinpointing flaw 3 above) and remove the 
+comment # marks for the corresponding lines in the two rows below. By doing so, the escape functions in sanitizing the user inputs 
+to decrease risk of injection flaws such as malcious scripts.
 
 FLAW 4:
 Exact source link pinpointing flaw 4:
