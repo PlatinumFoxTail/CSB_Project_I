@@ -3,7 +3,7 @@ from django.template import loader
 from django.db import transaction
 from .models import Account
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.html import escape 
+from django.contrib import messages
 
 
 # Create your views here.
@@ -28,11 +28,14 @@ def homePageView(request):
 	if request.method == 'POST':
 		sender = request.POST.get('from')
 		receiver = request.POST.get('to')
-		#sender = escape(request.POST.get('from'))
-                #receiver = escape(request.POST.get('to'))
-		amount = int(request.POST.get('amount')
+		amount = int(request.POST.get('amount'))
+		greeting = request.POST.get('greeting')
 		transfer(sender, receiver, amount)
 
 	accounts = Account.objects.all()
-	context = {'accounts': accounts}
+	context = {'accounts': accounts, 'greeting': greeting}
+
+	messages.success(request, "Payment with following greeting succeeded:" + greeting)
+        #messages.success(request, f"Payment with following greeting succeeded: {{greeting}})
+	
 	return render(request, 'pages/index.html', context)
