@@ -35,18 +35,17 @@ Directly after the flaw as indicated in the link to the flaw, Argon2 hash is com
 
 FLAW 3:
 Exact source link pinpointing flaw 3:
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/0c46e0b772d1b6ad041c76c84abf69f15e04c940/src/pages/views.py#L29
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/0c46e0b772d1b6ad041c76c84abf69f15e04c940/src/pages/views.py#L30
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/e4cd4e1d4140a4ac7d4bdde61e375ce0641f7194/src/pages/views.py#L39
 
 Description of flaw 3:
-In the existing application there is an Injection flaw. Since the sender and receiver variables are not sanitazied, an attacker 
-could inject e.g. malicious scripts such as following <script>alert("The page has been hacked!")</script> that would show to the 
-user that the page has been hacked.
+In the existing application there is an Injection flaw. Since the greeting input is not sanitazied prior to including it into the 
+message to the user, an attacker could inject e.g. malicious scripts such as following <script>alert("The page has been hacked!")</script> 
+that would show to the user that the page has been hacked.
 
 How to fix flaw 3:
-The flaw can be fixed by deleting the rows where the injection flaw occurs (the two links pinpointing flaw 3 above) and remove the 
-comment # marks for the corresponding lines in the two rows below. By doing so, the escape functions in sanitizing the user inputs 
-to decrease risk of injection flaws such as malcious scripts.
+The flaw can be fixed by deleting the row where the injection flaw occurs (the link pinpointing flaw 3 above) and remove the comment 
+# mark for the corresponding line in the row below. By doing so, the escape functions is sanitizing the user greeting input to decrease 
+risk of injection flaws such as malcious scripts.
 
 FLAW 4:
 Exact source link pinpointing flaw 4:
