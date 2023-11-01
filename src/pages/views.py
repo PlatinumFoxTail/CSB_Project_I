@@ -4,6 +4,7 @@ from django.db import transaction
 from .models import Account
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.utils.html import escape
 
 
 # Create your views here.
@@ -35,7 +36,8 @@ def homePageView(request):
 	accounts = Account.objects.all()
 	context = {'accounts': accounts, 'greeting': greeting}
 
-	messages.success(request, "Payment with following greeting succeeded:" + greeting)
-        #messages.success(request, f"Payment with following greeting succeeded: {{greeting}})
+	success_message = "Payment with following greeting succeeded: " + greeting
+	#success_message = f"Payment with following greeting succeeded: {escape(greeting)}"
+	messages.success(request, success_message)
 	
 	return render(request, 'pages/index.html', context)
