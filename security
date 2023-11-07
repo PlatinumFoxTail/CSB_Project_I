@@ -35,17 +35,18 @@ Directly after the flaw as indicated in the link to the flaw, Argon2 hash is com
 
 FLAW 3:
 Exact source link pinpointing flaw 3:
-https://github.com/PlatinumFoxTail/CSB_Project_I/blob/e4cd4e1d4140a4ac7d4bdde61e375ce0641f7194/src/pages/views.py#L39
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/786356b0a18e91db68d71b6463325650239f9a15/src/pages/templates/pages/index.html#L45
+https://github.com/PlatinumFoxTail/CSB_Project_I/blob/786356b0a18e91db68d71b6463325650239f9a15/src/pages/templates/pages/donation.html#L13C9-L13C49
 
 Description of flaw 3:
-In the existing application there is an Injection flaw. Since the greeting input is not sanitazied prior to including it into the 
-message to the user, an attacker could inject e.g. malicious scripts such as following <script>alert("The page has been hacked!")</script> 
-that would show to the user that the page has been hacked.
+In the existing application there is an Injection flaw. Since the donation input from the user is not sanitazied properly and because the 
+donation_message is not escaped properly in the donation.html, an attacker could inject e.g. malicious scripts such as following 
+<script>alert("The page has been hacked!")</script> that would show to the user that the page has been hacked.
 
 How to fix flaw 3:
-The flaw can be fixed by deleting the row where the injection flaw occurs (the link pinpointing flaw 3 above) and remove the comment 
-# mark for the corresponding line in the row below. By doing so, the escape functions is sanitizing the user greeting input to decrease 
-risk of injection flaws such as malcious scripts.
+The flaw can be corrected by sanitizing the donation input properly and escaping the donation_message properly as commented out in the 
+row below the row in the links pinpointing to flaw 3 above. By doing so, the risk of injection flaws such as malcious scripts are 
+decreased.
 
 FLAW 4:
 Exact source link pinpointing flaw 4:
