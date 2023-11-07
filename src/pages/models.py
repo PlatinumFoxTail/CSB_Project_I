@@ -5,3 +5,6 @@ from django.db import models
 class Account(models.Model):
 	iban = models.TextField()
 	balance = models.IntegerField()
+
+class Donation(models.Model):
+    message = models.CharField(max_length=255) 
