@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 from django.db import transaction
-from .models import Account
+from .models import Account, Donation
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.utils.html import escape
@@ -26,18 +26,24 @@ def transfer(sender, receiver, amount):
 @csrf_exempt
 #@login_required
 def homePageView(request):
-	if request.method == 'POST':
-		sender = request.POST.get('from')
-		receiver = request.POST.get('to')
-		amount = int(request.POST.get('amount'))
-		greeting = request.POST.get('greeting')
-		transfer(sender, receiver, amount)
+    if request.method == 'POST':
+        sender = request.POST.get('from')
+        receiver = request.POST.get('to')
+        amount = int(request.POST.get('amount'))
+        donation_message = request.POST.get('donation')
 
-	accounts = Account.objects.all()
-	context = {'accounts': accounts, 'greeting': greeting}
+        transfer(sender, receiver, amount)
 
-	success_message = "Payment with following greeting succeeded: " + greeting
-	#success_message = f"Payment with following greeting succeeded: {escape(greeting)}"
-	messages.success(request, success_message)
-	
-	return render(request, 'pages/index.html', context)
+        Donation.objects.create(message=donation_message)
+
+        accounts = Account.objects.all()
+        donation_messages = Donation.objects.all()
+
+        context = {'accounts': accounts, 'donation_messages': donation_messages}
+
+    accounts = Account.objects.all()
+    donation_messages = Donation.objects.all()
+
+    context = {'accounts': accounts, 'donation_messages': donation_messages}
+
+    return render(request, 'pages/donations.html', context)
